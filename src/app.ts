@@ -9,9 +9,7 @@ type Query {
 }`);
 
 const root = {
-  hello: () => {
-    return "Hello, World!";
-  },
+  hello: () => "Hello, World!",
 };
 
 const app: Application = express();
