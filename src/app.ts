@@ -19,7 +19,7 @@ app.use(
     schema,
     rootValue: root,
     graphiql: true,
-  })
+  }),
 );
 
 app.get("/", (_req: Request, res: Response) => {
