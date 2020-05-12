@@ -1,13 +1,13 @@
-type Card = {
+export type Card = {
   name: string;
   description: string;
 };
 
-class Deck {
+export class Deck {
   constructor(readonly name: string, readonly cards: Card[]) {}
 
   get isEmpty(): Boolean {
-    return this.cards.length > 0;
+    return this.cards.length === 0;
   }
 
   shuffle(): void {
