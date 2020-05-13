@@ -7,26 +7,26 @@ export class Card {
 }
 
 export class Deck {
-  readonly cards: Card[];
+  readonly drawPile: Card[];
   readonly discardPile: Card[] = [];
 
   constructor(readonly name: string, readonly cardsDefinitions: { name: string; description: string }[]) {
-    this.cards = cardsDefinitions.map((c) => new Card(c.name, c.description, this));
+    this.drawPile = cardsDefinitions.map((c) => new Card(c.name, c.description, this));
   }
 
   get isEmpty(): Boolean {
-    return this.cards.length === 0;
+    return this.drawPile.length === 0;
   }
 
   shuffle() {
-    for (let i = this.cards.length - 1; i > 0; i--) {
+    for (let i = this.drawPile.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
+      [this.drawPile[i], this.drawPile[j]] = [this.drawPile[j], this.drawPile[i]];
     }
   }
 
   draw(): Card | undefined {
-    return this.cards.shift();
+    return this.drawPile.shift();
   }
 
   discard(card: Card) {
@@ -34,7 +34,7 @@ export class Deck {
       throw new Error("Cannot discard a from a different deck");
     }
 
-    if (this.cards.includes(card)) {
+    if (this.drawPile.includes(card)) {
       throw new Error("Cannot discard a card that is still in the deck");
     }
     this.discardPile.push(card);
